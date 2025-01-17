@@ -60,15 +60,15 @@ fn sprite_movement(time: Res<Time>, mut sprite_position: Query<(&mut Direction, 
         }
 
 
-        if transform.translation.y > 200. {
+        if transform.translation.y > 540. {
             transform.translation.y = 0.;
-        } else if transform.translation.y < -200. {
+        } else if transform.translation.y < -540. {
             transform.translation.y = 0.;
         }
 
-        if transform.translation.x > 200. {
+        if transform.translation.x > 910. {
             transform.translation.x = 0.;
-        } else if transform.translation.x < -200. {
+        } else if transform.translation.x < -910. {
             transform.translation.x = 0.;
         }
     }
