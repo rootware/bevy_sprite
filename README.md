@@ -1,0 +1,2 @@
+# Learning Bevy to animate 2D grid walker for my RL project
+Learning how to do 2d sprite animations and movement and see if I can use that as visualization for my RL 2d grid walker. Also, want to make a tiny videogame for my niece eventually.
