@@ -41,18 +41,18 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     ));
 }
 
-pub const actions: [i32; 15] = [0, 1, 0, 2, 3, 3, 3, 3, 4, 0, 1, 2, 1, 5, 10];
+pub const ACTIONS: [i32; 15] = [0, 1, 0, 2, 3, 3, 3, 3, 4, 0, 1, 2, 1, 5, 10];
 /// The sprite is animated by changing its translation depending on the time that has passed since
 /// the last frame.
 fn sprite_movement(time: Res<Time>, mut sprite_position: Query<(&mut Direction, &mut Transform)>) {
-    for (mut logo, mut transform) in &mut sprite_position {
+    for (logo, mut transform) in &mut sprite_position {
         //  match *logo {
         //      Direction::Up => transform.translation.y += 150. * time.delta_secs(),
         //      Direction::Down => transform.translation.y -= 150. * time.delta_secs(),
         //  }
 
         let i = (time.elapsed_secs() as f64 / time.delta_secs_f64()) as usize % 15;
-        let my_move = actions[i];
+        let my_move = ACTIONS[i];
 
         match my_move {
             0 => transform.translation.y += 1.,
