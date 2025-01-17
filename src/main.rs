@@ -23,6 +23,7 @@ fn main() {
             FrameTimeDiagnosticsPlugin,
             LogDiagnosticsPlugin::default(),
         ))
+        .insert_resource(ClearColor(Color::rgb(0.9, 0.3, 0.6)))
         .add_systems(Startup, setup)
         .add_systems(Update, sprite_movement)
         .run();
@@ -38,7 +39,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2d);
     commands.spawn((
         Sprite::from_image(asset_server.load("/home/temp/Github_Projects/bevy_sprite/assets/pacman.png")),
-        Transform::from_xyz(100., 0., 0.),
+        Transform::from_xyz(100., 0., 0.).with_rotation(Quat::from_rotation_y(PI/12.) ),
         Direction::Up,
     ));
 }
@@ -56,7 +57,6 @@ fn sprite_movement(time: Res<Time>, mut sprite_position: Query<(&mut Direction, 
         let i = (time.elapsed_secs() as f64 / time.delta_secs_f64()) as usize % 15;
         let my_move = ACTIONS[i];
 
-        transform.with_rotation(Quat::from_rotation_y(PI/12.) );
         match my_move {
             0 => transform.translation.y += 1.,
             1 => transform.translation.y -= 1.,
@@ -64,6 +64,8 @@ fn sprite_movement(time: Res<Time>, mut sprite_position: Query<(&mut Direction, 
             3 => transform.translation.x -= 1.,
             _ => (),
         }
+
+        transform.rotate_z(PI/12.);
 
         if transform.translation.y > 540. {
             transform.translation.y = 0.;
