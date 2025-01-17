@@ -1,5 +1,7 @@
 //! Renders a 2D scene containing a single, moving sprite.
 
+use std::f32::consts::PI;
+
 use bevy::{
     diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
     prelude::*,
@@ -54,6 +56,7 @@ fn sprite_movement(time: Res<Time>, mut sprite_position: Query<(&mut Direction, 
         let i = (time.elapsed_secs() as f64 / time.delta_secs_f64()) as usize % 15;
         let my_move = ACTIONS[i];
 
+        transform.with_rotation(Quat::from_rotation_y(PI/12.) );
         match my_move {
             0 => transform.translation.y += 1.,
             1 => transform.translation.y -= 1.,
